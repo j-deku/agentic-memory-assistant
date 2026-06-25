@@ -1,0 +1,30 @@
+2026-06-25 04:35:52,011 [INFO] apscheduler.scheduler: Scheduler started
+2026-06-25 04:35:58,541 [INFO] assistant: User input: Remind me to cook food today around 4:30am
+2026-06-25 04:35:58,654 [INFO] assistant: Agent: invoking LLM
+2026-06-25 04:40:03,442 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-25 04:40:04,016 [INFO] assistant: Tool called: set_reminder | task='cook food' | time='tomorrow 4:30am'
+2026-06-25 04:40:04,923 [INFO] apscheduler.scheduler: Added job "_reminder_fired" to job store "default"
+2026-06-25 04:40:05,010 [INFO] assistant: Reminder scheduled successfully for 2026-06-26 04:30:00
+2026-06-25 04:40:05,118 [INFO] assistant: Agent: invoking LLM
+2026-06-25 04:40:39,944 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-25 04:41:24,910 [INFO] assistant: Assistant response: I've set a reminder for you. The task is "cook food" and it will be triggered on Friday, June 26th at 04:30 AM. Is there anything else I can assist you with?
+2026-06-25 04:44:08,480 [INFO] apscheduler.scheduler: Scheduler started
+2026-06-25 04:44:11,355 [INFO] assistant: User input: Remind me to cook food today around 5am
+2026-06-25 04:44:11,404 [INFO] assistant: Agent: invoking LLM
+2026-06-25 04:45:20,728 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-25 04:45:21,917 [INFO] assistant: Tool called: set_reminder | task='cook food' | time='tomorrow 5am'
+2026-06-25 04:45:22,572 [INFO] apscheduler.scheduler: Added job "_reminder_fired" to job store "default"
+2026-06-25 04:45:22,591 [INFO] assistant: Reminder scheduled successfully for 2026-06-26 05:00:00
+2026-06-25 04:45:22,675 [INFO] assistant: Agent: invoking LLM
+2026-06-25 04:46:29,632 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-25 04:46:55,155 [INFO] assistant: Assistant response: The reminder has been set for you. You will be reminded of 'cook food' on Friday, June 26th, at 05:00 AM.
+2026-06-25 04:49:15,539 [INFO] apscheduler.scheduler: Scheduler started
+2026-06-25 04:49:17,905 [INFO] assistant: User input: What do I have scheduled for today?
+2026-06-25 04:49:17,932 [INFO] assistant: Agent: invoking LLM
+2026-06-25 04:49:42,076 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-25 04:50:25,372 [INFO] assistant: Assistant response: I can help you check your upcoming reminders. Let's see what's planned for today.
+
+2026-06-25 04:50:25,899 [INFO] assistant: Tool called: get_upcoming_tasks
+2026-06-25 04:50:26,034 [INFO] assistant: Agent: invoking LLM
+2026-06-25 04:50:50,824 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-25 04:51:33,915 [INFO] assistant: Assistant response: It seems like your schedule has no upcoming reminders or tasks at the moment. If you have any specific events, appointments, or deadlines that need to be reminded, feel free to let me know and I can set a reminder for you!

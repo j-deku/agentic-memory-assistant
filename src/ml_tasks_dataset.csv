@@ -1,0 +1,10 @@
+task_length,category,days_left,is_overdue,label_completed
+9,work,0,0,1
+7,work,-2,1,1
+12,work,-2,1,1
+10,personal,24,0,1
+8,personal,-1,1,1
+7,personal,0,0,1
+6,personal,0,0,1
+15,health,1,0,0
+13,work,-2,1,0
