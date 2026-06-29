@@ -302,18 +302,99 @@ class AgentOrchestrator:
     # Response selection
     # ------------------------------------------------------------------ #
 
-    def _best_response(
-        self, results: list[ExecutionResult], plan: Plan
-    ) -> str:
+    """
+    orchestrator_patch.py
+
+    Replace the _best_response method in your existing orchestrator.py
+    Also patches _execute_pending to format responses properly.
+
+    INSTRUCTIONS:
+    Copy the _best_response and _format_task_list methods below
+    into your src/agentic/orchestrator.py, replacing the existing
+    _best_response method.
+    """
+
+    # ---------------------------------------------------------------------------
+    # Paste these two methods into AgentOrchestrator class in orchestrator.py
+    # ---------------------------------------------------------------------------
+
+    def _format_task_list(self, tasks) -> str:
+        """Format raw task tuples/dicts into readable text."""
+        if not tasks:
+            return "You have no tasks right now."
+        lines = [f"Here are your {len(tasks)} pending task{'s' if len(tasks) != 1 else ''}:"]
+        for t in tasks[:8]:
+            if isinstance(t, (list, tuple)):
+                title    = t[1] if len(t) > 1 else "Unknown"
+                due      = t[3] if len(t) > 3 else None
+                category = t[2] if len(t) > 2 else None
+            else:
+                title    = t.get("title", "Unknown")
+                due      = t.get("due_date")
+                category = t.get("category")
+            line = f"  • {title.capitalize()}"
+            if due and str(due) not in ("None", ""):
+                line += f" — due {due}"
+            if category and str(category) not in ("None", ""):
+                line += f" ({category})"
+            lines.append(line)
+        if len(tasks) > 8:
+            lines.append(f"  ...and {len(tasks) - 8} more.")
+        return "\n".join(lines)
+
+
+    def _format_overdue(self, tasks) -> str:
+        """Format raw overdue task tuples into readable text."""
+        if not tasks:
+            return "Great news — you have no overdue tasks!"
+        lines = [f"You have {len(tasks)} overdue task{'s' if len(tasks) != 1 else ''} that need attention:"]
+        for t in tasks:
+            if isinstance(t, (list, tuple)):
+                title = t[1] if len(t) > 1 else "Unknown"
+                due   = t[3] if len(t) > 3 else None
+            else:
+                title = t.get("title", "Unknown")
+                due   = t.get("due_date")
+            line = f"  • {title.capitalize()}"
+            if due and str(due) not in ("None", ""):
+                line += f" — was due {due}"
+            lines.append(line)
+        lines.append("\nWould you like to complete or reschedule any of these?")
+        return "\n".join(lines)
+
+
+    def _format_recommended(self, tasks) -> str:
+        """Format raw recommended task tuples into readable text."""
+        if not tasks:
+            return "You're all caught up — no recommendations right now."
+        lines = ["Here's what I recommend you focus on next:"]
+        for t in tasks[:5]:
+            if isinstance(t, (list, tuple)):
+                title    = t[1] if len(t) > 1 else "Unknown"
+                category = t[2] if len(t) > 2 else None
+            else:
+                title    = t.get("title", "Unknown")
+                category = t.get("category")
+            line = f"  • {title.capitalize()}"
+            if category and str(category) not in ("None", ""):
+                line += f" ({category})"
+            lines.append(line)
+        return "\n".join(lines)
+
+
+    def _best_response(self, results, plan) -> str:
         """
         Pick the most user-facing response from the execution results.
 
         Priority:
-          1. dialogue step response  (already formatted for the user)
-          2. last successful non-list response
-          3. list_tasks result (formatted)
-          4. empty string (caller handles)
+        1. dialogue step response  (already formatted for the user)
+        2. add_task confirmation
+        3. complete / delete confirmation
+        4. analytics (productivity, overdue, recommended, habits)
+        5. list_tasks (formatted)
+        6. empty string (caller handles)
         """
+        # 1. Dialogue step — already user-facing
         dialogue_resp = next(
             (r.response for r in results if r.step.tool == "dialogue" and r.ok),
             None,
@@ -321,38 +402,30 @@ class AgentOrchestrator:
         if dialogue_resp:
             return dialogue_resp
 
-        # For add/complete/delete the DM response engine is called inside
-        # the tool adapters, so the step.result already holds a nice string.
-        for step in reversed(plan.succeeded_steps):
-            if step.tool in ("add_task",) and isinstance(step.result, str):
+        # 2. Add task — return confirmation, NOT the subsequent list_tasks
+        for step in plan.succeeded_steps:
+            if step.tool == "add_task" and isinstance(step.result, str):
                 return step.result
 
-        # complete / delete adapters return the formatted string directly
+        # 3. Complete / delete
         for step in reversed(plan.succeeded_steps):
             if step.tool in ("complete_task", "delete_task") and isinstance(step.result, str):
                 return step.result
 
-        # Analytics
+        # 4. Analytics — format properly instead of raw str()
         for step in reversed(plan.succeeded_steps):
-            if step.tool in (
-                "productivity_score", "get_overdue_tasks",
-                "get_recommended_tasks", "analyze_habits",
-            ) and step.result is not None:
+            if step.tool == "get_overdue_tasks" and step.result is not None:
+                return self._format_overdue(step.result)
+            if step.tool == "get_recommended_tasks" and step.result is not None:
+                return self._format_recommended(step.result)
+            if step.tool == "productivity_score" and step.result is not None:
+                return str(step.result)
+            if step.tool == "analyze_habits" and step.result is not None:
                 return str(step.result)
 
-        # List tasks
+        # 5. List tasks — formatted
         for step in reversed(plan.succeeded_steps):
             if step.tool == "list_tasks" and step.result is not None:
-                tasks = step.result
-                if isinstance(tasks, list) and tasks:
-                    lines = ["Here are your tasks:"]
-                    for t in tasks:
-                        title = (
-                            t[1] if isinstance(t, (list, tuple))
-                            else t.get("title", str(t))
-                        )
-                        lines.append(f"  • {title}")
-                    return "\n".join(lines)
-                return "You have no tasks right now."
+                return self._format_task_list(step.result)
 
         return ""

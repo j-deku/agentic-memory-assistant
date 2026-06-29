@@ -28,3 +28,1099 @@
 2026-06-25 04:50:26,034 [INFO] assistant: Agent: invoking LLM
 2026-06-25 04:50:50,824 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
 2026-06-25 04:51:33,915 [INFO] assistant: Assistant response: It seems like your schedule has no upcoming reminders or tasks at the moment. If you have any specific events, appointments, or deadlines that need to be reminded, feel free to let me know and I can set a reminder for you!
+2026-06-25 21:51:32,319 [INFO] apscheduler.scheduler: Scheduler started
+2026-06-25 21:51:34,872 [INFO] assistant: User input: What do I have scheduled for today?
+2026-06-25 21:51:35,021 [INFO] assistant: Agent: invoking LLM
+2026-06-25 21:52:48,550 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-25 21:53:15,288 [INFO] assistant: Assistant response: To help you schedule tasks for today, we need to know the time when you want to set the reminder. Could you please provide me with the time in natural language or an ISO format date/time?
+
+If you're not sure about the exact time, let's use a common example: "tomorrow 10am". Would that be helpful?
+2026-06-25 21:58:52,522 [INFO] apscheduler.scheduler: Scheduler started
+2026-06-25 21:58:54,729 [INFO] assistant: User input: Remind me to cook food today around 10:5pm
+2026-06-25 21:58:54,743 [INFO] assistant: Agent: invoking LLM
+2026-06-25 22:00:24,289 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-25 22:00:24,377 [INFO] assistant: Agent: invoking LLM
+2026-06-25 22:00:41,894 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-25 22:01:44,961 [INFO] assistant: Assistant response: I'm sorry, but I can't directly invoke a function or handle errors. However, I can help you understand what's going wrong.
+
+The error message suggests that there is an issue with the `task_description` field in your reminder request. Specifically:
+
+1. The task description should be a string.
+2. It should contain a valid date and time format (e.g., "tomorrow 10:50 pm").
+
+If you're trying to set a reminder for a specific time, make sure that the `task_description` field is correctly formatted as a string with a date and time in ISO format.
+
+Could you please provide more details about what you're trying to do? If it's related to a task or event, let me know so I can assist further.
+2026-06-25 22:05:04,594 [INFO] apscheduler.scheduler: Scheduler started
+2026-06-25 22:05:09,826 [INFO] assistant: User input: Remind me to cook food today around 10:08pm
+2026-06-25 22:05:09,939 [INFO] assistant: Agent: invoking LLM
+2026-06-25 22:05:33,471 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-25 22:05:34,272 [INFO] assistant: Agent: invoking LLM
+2026-06-25 22:05:51,130 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-25 22:06:14,717 [INFO] assistant: Assistant response: I'm sorry, but I can't directly invoke a function or handle errors. However, if you could provide more details about what's going wrong in your request, I'd be happy to help troubleshoot it further. If you're having trouble with the task description, please share that as well.
+2026-06-25 22:08:46,870 [INFO] apscheduler.scheduler: Scheduler started
+2026-06-25 22:08:49,142 [INFO] assistant: User input: Open a browser and search for the definition of breakfast
+2026-06-25 22:08:49,156 [INFO] assistant: Agent: invoking LLM
+2026-06-25 22:09:02,303 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-25 22:09:03,224 [INFO] assistant: Tool called: open_and_search | query='breakfast'
+2026-06-25 22:09:29,501 [ERROR] assistant: Browser error during search: Page.goto: net::ERR_CONNECTION_RESET at https://duckduckgo.com/?q=breakfast&ia=web
+Call log:
+  - navigating to "https://duckduckgo.com/?q=breakfast&ia=web", waiting until "load"
+Traceback (most recent call last):
+  File "D:\model\assistant\src\assistant.py", line 129, in open_and_search
+    page.goto(f"https://duckduckgo.com/?q={query}&ia=web", timeout=15000)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\model\assistant\venv\Lib\site-packages\playwright\sync_api\_generated.py", line 9612, in goto
+    self._sync(
+    ~~~~~~~~~~^
+        self._impl_obj.goto(
+        ^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        )
+        ^
+    )
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\playwright\_impl\_sync_base.py", line 115, in _sync
+    return task.result()
+           ~~~~~~~~~~~^^
+  File "D:\model\assistant\venv\Lib\site-packages\playwright\_impl\_page.py", line 557, in goto
+    return await self._main_frame.goto(**locals_to_params(locals()))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\model\assistant\venv\Lib\site-packages\playwright\_impl\_frame.py", line 156, in goto
+    await self._channel.send(
+        "goto", self._navigation_timeout, locals_to_params(locals())
+    )
+  File "D:\model\assistant\venv\Lib\site-packages\playwright\_impl\_connection.py", line 69, in send
+    return await self._connection.wrap_api_call(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\playwright\_impl\_connection.py", line 559, in wrap_api_call
+    raise rewrite_error(error, f"{parsed_st['apiName']}: {error}") from None
+playwright._impl._errors.Error: Page.goto: net::ERR_CONNECTION_RESET at https://duckduckgo.com/?q=breakfast&ia=web
+Call log:
+  - navigating to "https://duckduckgo.com/?q=breakfast&ia=web", waiting until "load"
+
+2026-06-25 22:09:33,889 [INFO] assistant: Agent: invoking LLM
+2026-06-25 22:09:41,599 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-25 22:09:51,656 [INFO] assistant: Assistant response: I'm sorry to hear that. Could you please provide me with a query so I can try searching for you?
+2026-06-26 01:26:29,509 [INFO] apscheduler.scheduler: Scheduler started
+2026-06-26 01:26:32,552 [INFO] assistant: User input: Open a browser and search for the definition of breakfast
+2026-06-26 01:26:32,571 [INFO] assistant: Agent: invoking LLM
+2026-06-26 01:28:17,278 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-26 01:28:18,121 [INFO] assistant: Tool called: open_and_search | query='breakfast'
+2026-06-26 01:28:58,242 [INFO] assistant: Browser search completed successfully.
+2026-06-26 01:29:02,355 [INFO] assistant: Agent: invoking LLM
+2026-06-26 01:29:51,814 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-26 01:31:55,434 [INFO] assistant: Assistant response: The user requested a search result for 'breakfast' using TripAdvisor. Here is the relevant information:
+
+1. **TripAdvisor Review**: 
+   - [https://www.tripadvisor.com](https://www.tripadvisor.com)
+   - [Restaurants-g293797-zfp2-Accra_Greater_Accra.html](https://www.tripadvisor.com)
+
+2. **The 10 Best Breakfast Restaurants in Accra (UPDATED 2026)**:
+   - The user provided a link to TripAdvisor, which is the best source for breakfast restaurants in Accra.
+   - Here are some of the top-rated breakfast restaurants in Accra:
+
+     1. 72 unbiased reviews
+     2. Cuppa Cappuccino, Accra
+     3. 4.2 out of 5 on Tripadvisor and ranked #43 of 363 restaurants in Accra
+
+   - You can search for specific locations or types of breakfast options by providing the name of a particular location or type of restaurant.
+
+Would you like to proceed with searching for a specific location or type of breakfast?
+2026-06-26 02:13:58,497 [INFO] apscheduler.scheduler: Scheduler started
+2026-06-26 02:14:01,633 [INFO] assistant: User input: Open a browser and search for the definition of breakfast
+2026-06-26 02:14:01,653 [INFO] assistant: Agent: invoking LLM
+2026-06-26 02:14:03,575 [INFO] httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-06-26 02:14:03,607 [INFO] assistant: Tool called: open_and_search | query='definition of breakfast'
+2026-06-26 02:14:25,740 [INFO] assistant: Browser search completed successfully.
+2026-06-26 02:14:27,638 [INFO] assistant: Agent: invoking LLM
+2026-06-26 02:14:27,642 [ERROR] assistant: LLM invocation failed: contents are required.
+Traceback (most recent call last):
+  File "D:\model\assistant\src\assistant.py", line 170, in call_model
+    response = llm.invoke(state["messages"])
+  File "D:\model\assistant\venv\Lib\site-packages\langchain_core\runnables\base.py", line 6004, in invoke
+    return self.bound.invoke(
+           ~~~~~~~~~~~~~~~~~^
+        input,
+        ^^^^^^
+        self._merge_configs(config),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        **{**self.kwargs, **kwargs},
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 2701, in invoke
+    return super().invoke(input, config, stop=stop, **kwargs)
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\model\assistant\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 476, in invoke
+    self.generate_prompt(
+    ~~~~~~~~~~~~~~~~~~~~^
+        [self._convert_input(input)],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    ).generations[0][0],
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1849, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\model\assistant\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1656, in generate
+    self._generate_with_cache(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        m,
+        ^^
+    ...<2 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1994, in _generate_with_cache
+    result = self._generate(
+        messages, stop=stop, run_manager=run_manager, **kwargs
+    )
+  File "D:\model\assistant\venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 3234, in _generate
+    response: GenerateContentResponse = self.client.models.generate_content(
+                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        **request,
+        ^^^^^^^^^^
+    )
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\google\genai\models.py", line 6503, in generate_content
+    return self._generate_content(
+           ~~~~~~~~~~~~~~~~~~~~~~^
+        model=model, contents=contents, config=parsed_config
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\google\genai\models.py", line 4930, in _generate_content
+    request_dict = _GenerateContentParameters_to_mldev(
+        self._api_client, parameter_model, None, parameter_model
+    )
+  File "D:\model\assistant\venv\Lib\site-packages\google\genai\models.py", line 1668, in _GenerateContentParameters_to_mldev
+    for item in t.t_contents(getv(from_object, ['contents']))
+                ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\model\assistant\venv\Lib\site-packages\google\genai\_transformers.py", line 482, in t_contents
+    raise ValueError('contents are required.')
+ValueError: contents are required.
+2026-06-26 02:14:27,815 [ERROR] assistant: run_assistant failed: contents are required.
+Traceback (most recent call last):
+  File "D:\model\assistant\src\assistant.py", line 202, in run_assistant
+    for output in app.stream(inputs):
+                  ~~~~~~~~~~^^^^^^^^
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\pregel\main.py", line 2982, in stream
+    for _ in runner.tick(
+             ~~~~~~~~~~~^
+        [t for t in loop.tasks.values() if not t.writes],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        schedule_task=loop.accept_push,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ):
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\pregel\_runner.py", line 207, in tick
+    run_with_retry(
+    ~~~~~~~~~~~~~~^
+        t,
+        ^^
+    ...<10 lines>...
+        },
+        ^^
+    )
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\pregel\_retry.py", line 617, in run_with_retry
+    return task.proc.invoke(task.input, config)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 684, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 426, in invoke
+    ret = self.func(*args, **kwargs)
+  File "D:\model\assistant\src\assistant.py", line 170, in call_model
+    response = llm.invoke(state["messages"])
+  File "D:\model\assistant\venv\Lib\site-packages\langchain_core\runnables\base.py", line 6004, in invoke
+    return self.bound.invoke(
+           ~~~~~~~~~~~~~~~~~^
+        input,
+        ^^^^^^
+        self._merge_configs(config),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        **{**self.kwargs, **kwargs},
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 2701, in invoke
+    return super().invoke(input, config, stop=stop, **kwargs)
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\model\assistant\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 476, in invoke
+    self.generate_prompt(
+    ~~~~~~~~~~~~~~~~~~~~^
+        [self._convert_input(input)],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    ).generations[0][0],
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1849, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\model\assistant\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1656, in generate
+    self._generate_with_cache(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        m,
+        ^^
+    ...<2 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1994, in _generate_with_cache
+    result = self._generate(
+        messages, stop=stop, run_manager=run_manager, **kwargs
+    )
+  File "D:\model\assistant\venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 3234, in _generate
+    response: GenerateContentResponse = self.client.models.generate_content(
+                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        **request,
+        ^^^^^^^^^^
+    )
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\google\genai\models.py", line 6503, in generate_content
+    return self._generate_content(
+           ~~~~~~~~~~~~~~~~~~~~~~^
+        model=model, contents=contents, config=parsed_config
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\google\genai\models.py", line 4930, in _generate_content
+    request_dict = _GenerateContentParameters_to_mldev(
+        self._api_client, parameter_model, None, parameter_model
+    )
+  File "D:\model\assistant\venv\Lib\site-packages\google\genai\models.py", line 1668, in _GenerateContentParameters_to_mldev
+    for item in t.t_contents(getv(from_object, ['contents']))
+                ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\model\assistant\venv\Lib\site-packages\google\genai\_transformers.py", line 482, in t_contents
+    raise ValueError('contents are required.')
+ValueError: contents are required.
+During task with name 'agent' and id 'df79ab86-ad26-fd6c-1250-61068a480d99'
+2026-06-26 02:18:08,909 [INFO] apscheduler.scheduler: Scheduler started
+2026-06-26 02:18:09,031 [INFO] assistant: User input: Open a browser and search for the definition of breakfast
+2026-06-26 02:18:09,050 [INFO] assistant: Agent: invoking LLM
+2026-06-26 02:18:09,051 [ERROR] assistant: LLM invocation failed: 'str' object has no attribute 'invoke'
+Traceback (most recent call last):
+  File "D:\model\assistant\src\assistant.py", line 166, in call_model
+    response = llm.invoke(state["messages"])
+               ^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'invoke'
+2026-06-26 02:18:09,061 [ERROR] assistant: run_assistant failed: 'str' object has no attribute 'invoke'
+Traceback (most recent call last):
+  File "D:\model\assistant\src\assistant.py", line 198, in run_assistant
+    for output in app.stream(inputs):
+                  ~~~~~~~~~~^^^^^^^^
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\pregel\main.py", line 2982, in stream
+    for _ in runner.tick(
+             ~~~~~~~~~~~^
+        [t for t in loop.tasks.values() if not t.writes],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        schedule_task=loop.accept_push,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ):
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\pregel\_runner.py", line 207, in tick
+    run_with_retry(
+    ~~~~~~~~~~~~~~^
+        t,
+        ^^
+    ...<10 lines>...
+        },
+        ^^
+    )
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\pregel\_retry.py", line 617, in run_with_retry
+    return task.proc.invoke(task.input, config)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 684, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 426, in invoke
+    ret = self.func(*args, **kwargs)
+  File "D:\model\assistant\src\assistant.py", line 166, in call_model
+    response = llm.invoke(state["messages"])
+               ^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'invoke'
+During task with name 'agent' and id 'febd7bbf-1951-8c76-b461-ed822a547fa5'
+2026-06-26 04:06:53,297 [INFO] apscheduler.scheduler: Scheduler started
+2026-06-26 04:06:56,509 [INFO] assistant: User input: Remind me to cook food around 10am
+2026-06-26 04:06:56,551 [INFO] assistant: Agent: invoking LLM
+2026-06-26 04:06:58,940 [INFO] httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-06-26 04:06:58,980 [INFO] assistant: Tool called: set_reminder | task='cook food' | time='10am'
+2026-06-26 04:07:11,035 [INFO] apscheduler.scheduler: Added job "_reminder_fired" to job store "default"
+2026-06-26 04:07:11,038 [INFO] assistant: Reminder scheduled successfully for 2026-06-26 10:00:00
+2026-06-26 04:07:11,054 [INFO] assistant: Agent: invoking LLM
+2026-06-26 04:07:11,065 [ERROR] assistant: LLM invocation failed: contents are required.
+Traceback (most recent call last):
+  File "D:\model\assistant\src\assistant.py", line 170, in call_model
+    response = llm.invoke(state["messages"])
+  File "D:\model\assistant\venv\Lib\site-packages\langchain_core\runnables\base.py", line 6004, in invoke
+    return self.bound.invoke(
+           ~~~~~~~~~~~~~~~~~^
+        input,
+        ^^^^^^
+        self._merge_configs(config),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        **{**self.kwargs, **kwargs},
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 2701, in invoke
+    return super().invoke(input, config, stop=stop, **kwargs)
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\model\assistant\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 476, in invoke
+    self.generate_prompt(
+    ~~~~~~~~~~~~~~~~~~~~^
+        [self._convert_input(input)],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    ).generations[0][0],
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1849, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\model\assistant\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1656, in generate
+    self._generate_with_cache(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        m,
+        ^^
+    ...<2 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1994, in _generate_with_cache
+    result = self._generate(
+        messages, stop=stop, run_manager=run_manager, **kwargs
+    )
+  File "D:\model\assistant\venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 3234, in _generate
+    response: GenerateContentResponse = self.client.models.generate_content(
+                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        **request,
+        ^^^^^^^^^^
+    )
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\google\genai\models.py", line 6503, in generate_content
+    return self._generate_content(
+           ~~~~~~~~~~~~~~~~~~~~~~^
+        model=model, contents=contents, config=parsed_config
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\google\genai\models.py", line 4930, in _generate_content
+    request_dict = _GenerateContentParameters_to_mldev(
+        self._api_client, parameter_model, None, parameter_model
+    )
+  File "D:\model\assistant\venv\Lib\site-packages\google\genai\models.py", line 1668, in _GenerateContentParameters_to_mldev
+    for item in t.t_contents(getv(from_object, ['contents']))
+                ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\model\assistant\venv\Lib\site-packages\google\genai\_transformers.py", line 482, in t_contents
+    raise ValueError('contents are required.')
+ValueError: contents are required.
+2026-06-26 04:07:11,160 [ERROR] assistant: run_assistant failed: contents are required.
+Traceback (most recent call last):
+  File "D:\model\assistant\src\assistant.py", line 202, in run_assistant
+    for output in app.stream(inputs):
+                  ~~~~~~~~~~^^^^^^^^
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\pregel\main.py", line 2982, in stream
+    for _ in runner.tick(
+             ~~~~~~~~~~~^
+        [t for t in loop.tasks.values() if not t.writes],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        schedule_task=loop.accept_push,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ):
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\pregel\_runner.py", line 207, in tick
+    run_with_retry(
+    ~~~~~~~~~~~~~~^
+        t,
+        ^^
+    ...<10 lines>...
+        },
+        ^^
+    )
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\pregel\_retry.py", line 617, in run_with_retry
+    return task.proc.invoke(task.input, config)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 684, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 426, in invoke
+    ret = self.func(*args, **kwargs)
+  File "D:\model\assistant\src\assistant.py", line 170, in call_model
+    response = llm.invoke(state["messages"])
+  File "D:\model\assistant\venv\Lib\site-packages\langchain_core\runnables\base.py", line 6004, in invoke
+    return self.bound.invoke(
+           ~~~~~~~~~~~~~~~~~^
+        input,
+        ^^^^^^
+        self._merge_configs(config),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        **{**self.kwargs, **kwargs},
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 2701, in invoke
+    return super().invoke(input, config, stop=stop, **kwargs)
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\model\assistant\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 476, in invoke
+    self.generate_prompt(
+    ~~~~~~~~~~~~~~~~~~~~^
+        [self._convert_input(input)],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    ).generations[0][0],
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1849, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\model\assistant\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1656, in generate
+    self._generate_with_cache(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        m,
+        ^^
+    ...<2 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1994, in _generate_with_cache
+    result = self._generate(
+        messages, stop=stop, run_manager=run_manager, **kwargs
+    )
+  File "D:\model\assistant\venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 3234, in _generate
+    response: GenerateContentResponse = self.client.models.generate_content(
+                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        **request,
+        ^^^^^^^^^^
+    )
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\google\genai\models.py", line 6503, in generate_content
+    return self._generate_content(
+           ~~~~~~~~~~~~~~~~~~~~~~^
+        model=model, contents=contents, config=parsed_config
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\google\genai\models.py", line 4930, in _generate_content
+    request_dict = _GenerateContentParameters_to_mldev(
+        self._api_client, parameter_model, None, parameter_model
+    )
+  File "D:\model\assistant\venv\Lib\site-packages\google\genai\models.py", line 1668, in _GenerateContentParameters_to_mldev
+    for item in t.t_contents(getv(from_object, ['contents']))
+                ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\model\assistant\venv\Lib\site-packages\google\genai\_transformers.py", line 482, in t_contents
+    raise ValueError('contents are required.')
+ValueError: contents are required.
+During task with name 'agent' and id '072a561f-d4b2-4b05-cd20-1ff135084552'
+2026-06-26 04:07:11,253 [INFO] assistant: User input: Open a browser and search for the definition of breakfast
+2026-06-26 04:07:11,263 [INFO] assistant: Agent: invoking LLM
+2026-06-26 04:07:13,205 [INFO] httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2026-06-26 04:07:13,242 [INFO] assistant: Tool called: open_and_search | query='definition of breakfast'
+2026-06-26 04:07:34,945 [INFO] assistant: Browser search completed successfully.
+2026-06-26 04:07:38,086 [INFO] assistant: Agent: invoking LLM
+2026-06-26 04:07:38,092 [ERROR] assistant: LLM invocation failed: contents are required.
+Traceback (most recent call last):
+  File "D:\model\assistant\src\assistant.py", line 170, in call_model
+    response = llm.invoke(state["messages"])
+  File "D:\model\assistant\venv\Lib\site-packages\langchain_core\runnables\base.py", line 6004, in invoke
+    return self.bound.invoke(
+           ~~~~~~~~~~~~~~~~~^
+        input,
+        ^^^^^^
+        self._merge_configs(config),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        **{**self.kwargs, **kwargs},
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 2701, in invoke
+    return super().invoke(input, config, stop=stop, **kwargs)
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\model\assistant\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 476, in invoke
+    self.generate_prompt(
+    ~~~~~~~~~~~~~~~~~~~~^
+        [self._convert_input(input)],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    ).generations[0][0],
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1849, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\model\assistant\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1656, in generate
+    self._generate_with_cache(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        m,
+        ^^
+    ...<2 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1994, in _generate_with_cache
+    result = self._generate(
+        messages, stop=stop, run_manager=run_manager, **kwargs
+    )
+  File "D:\model\assistant\venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 3234, in _generate
+    response: GenerateContentResponse = self.client.models.generate_content(
+                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        **request,
+        ^^^^^^^^^^
+    )
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\google\genai\models.py", line 6503, in generate_content
+    return self._generate_content(
+           ~~~~~~~~~~~~~~~~~~~~~~^
+        model=model, contents=contents, config=parsed_config
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\google\genai\models.py", line 4930, in _generate_content
+    request_dict = _GenerateContentParameters_to_mldev(
+        self._api_client, parameter_model, None, parameter_model
+    )
+  File "D:\model\assistant\venv\Lib\site-packages\google\genai\models.py", line 1668, in _GenerateContentParameters_to_mldev
+    for item in t.t_contents(getv(from_object, ['contents']))
+                ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\model\assistant\venv\Lib\site-packages\google\genai\_transformers.py", line 482, in t_contents
+    raise ValueError('contents are required.')
+ValueError: contents are required.
+2026-06-26 04:07:38,102 [ERROR] assistant: run_assistant failed: contents are required.
+Traceback (most recent call last):
+  File "D:\model\assistant\src\assistant.py", line 202, in run_assistant
+    for output in app.stream(inputs):
+                  ~~~~~~~~~~^^^^^^^^
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\pregel\main.py", line 2982, in stream
+    for _ in runner.tick(
+             ~~~~~~~~~~~^
+        [t for t in loop.tasks.values() if not t.writes],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        schedule_task=loop.accept_push,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ):
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\pregel\_runner.py", line 207, in tick
+    run_with_retry(
+    ~~~~~~~~~~~~~~^
+        t,
+        ^^
+    ...<10 lines>...
+        },
+        ^^
+    )
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\pregel\_retry.py", line 617, in run_with_retry
+    return task.proc.invoke(task.input, config)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 684, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 426, in invoke
+    ret = self.func(*args, **kwargs)
+  File "D:\model\assistant\src\assistant.py", line 170, in call_model
+    response = llm.invoke(state["messages"])
+  File "D:\model\assistant\venv\Lib\site-packages\langchain_core\runnables\base.py", line 6004, in invoke
+    return self.bound.invoke(
+           ~~~~~~~~~~~~~~~~~^
+        input,
+        ^^^^^^
+        self._merge_configs(config),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        **{**self.kwargs, **kwargs},
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 2701, in invoke
+    return super().invoke(input, config, stop=stop, **kwargs)
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\model\assistant\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 476, in invoke
+    self.generate_prompt(
+    ~~~~~~~~~~~~~~~~~~~~^
+        [self._convert_input(input)],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    ).generations[0][0],
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1849, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\model\assistant\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1656, in generate
+    self._generate_with_cache(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        m,
+        ^^
+    ...<2 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1994, in _generate_with_cache
+    result = self._generate(
+        messages, stop=stop, run_manager=run_manager, **kwargs
+    )
+  File "D:\model\assistant\venv\Lib\site-packages\langchain_google_genai\chat_models.py", line 3234, in _generate
+    response: GenerateContentResponse = self.client.models.generate_content(
+                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        **request,
+        ^^^^^^^^^^
+    )
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\google\genai\models.py", line 6503, in generate_content
+    return self._generate_content(
+           ~~~~~~~~~~~~~~~~~~~~~~^
+        model=model, contents=contents, config=parsed_config
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\google\genai\models.py", line 4930, in _generate_content
+    request_dict = _GenerateContentParameters_to_mldev(
+        self._api_client, parameter_model, None, parameter_model
+    )
+  File "D:\model\assistant\venv\Lib\site-packages\google\genai\models.py", line 1668, in _GenerateContentParameters_to_mldev
+    for item in t.t_contents(getv(from_object, ['contents']))
+                ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\model\assistant\venv\Lib\site-packages\google\genai\_transformers.py", line 482, in t_contents
+    raise ValueError('contents are required.')
+ValueError: contents are required.
+During task with name 'agent' and id '338034ea-bbd3-26e2-b7fa-c0431fc58969'
+2026-06-26 04:31:19,161 [INFO] apscheduler.scheduler: Scheduler started
+2026-06-26 04:31:21,470 [INFO] assistant: User input: Remind me to cook rice around 10am
+2026-06-26 04:31:21,505 [INFO] assistant: Agent: invoking LLM
+2026-06-26 04:35:04,316 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-26 04:35:05,982 [INFO] assistant: Tool called: set_reminder | task='cook rice' | time='in 2 hours'
+2026-06-26 04:35:06,234 [INFO] apscheduler.scheduler: Added job "_reminder_fired" to job store "default"
+2026-06-26 04:35:06,236 [INFO] assistant: One-time reminder scheduled for 2026-06-26 06:35:05.983547+00:00
+2026-06-26 04:35:06,251 [INFO] assistant: Agent: invoking LLM
+2026-06-26 04:35:33,460 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-26 04:36:16,746 [INFO] assistant: Assistant response: The reminder has been set for you. You will be reminded of cooking rice on Friday, June 26th at 06:35 AM in the Africa/Accra timezone. Is there anything else I can assist you with?
+2026-06-26 08:11:28,875 [INFO] apscheduler.scheduler: Scheduler started
+2026-06-26 08:11:31,577 [INFO] assistant: User input: Remind me to cook rice around 10am tomorrow
+2026-06-26 08:11:31,605 [INFO] assistant: Agent: invoking LLM
+2026-06-26 08:15:43,429 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-26 08:15:44,510 [INFO] assistant: Tool called: set_reminder | task='cook rice' | time='tomorrow at 10am'
+2026-06-26 08:15:45,053 [INFO] apscheduler.scheduler: Added job "_reminder_fired" to job store "default"
+2026-06-26 08:15:45,056 [INFO] assistant: One-time reminder scheduled for 2026-06-27 10:00:00+00:00
+2026-06-26 08:15:45,078 [INFO] assistant: Agent: invoking LLM
+2026-06-26 08:16:15,494 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-26 08:17:16,071 [INFO] assistant: Assistant response: The reminder has been set for you. You will be reminded to "cook rice" on Saturday, June 27th at 10:00 AM in Africa/Accra. Is there anything else I can assist you with?
+2026-06-26 10:20:39,613 [INFO] apscheduler.scheduler: Scheduler started
+2026-06-26 10:20:42,099 [INFO] assistant: User input: Remind me to cook rice around 10am tomorrow
+2026-06-26 10:20:42,119 [INFO] assistant: Agent: invoking LLM
+2026-06-26 10:24:31,071 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-26 10:24:32,650 [INFO] assistant: Tool called: set_reminder | task='cook rice' | time='tomorrow at 10am'
+2026-06-26 10:24:32,952 [INFO] apscheduler.scheduler: Added job "_reminder_fired" to job store "default"
+2026-06-26 10:24:32,956 [INFO] assistant: One-time reminder scheduled for 2026-06-27 10:00:00+00:00
+2026-06-26 10:24:33,054 [INFO] assistant: Agent: invoking LLM
+2026-06-26 10:25:01,337 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-26 10:25:46,655 [INFO] assistant: Assistant response: The reminder has been set for you. You will be reminded to "cook rice" on Saturday, June 27th at 10:00 AM in Africa/Accra. Is there anything else I can assist you with?
+2026-06-26 12:30:42,307 [INFO] apscheduler.scheduler: Scheduler started
+2026-06-26 12:30:44,870 [INFO] assistant: User input: Remind me to cook rice around 10am tomorrow
+2026-06-26 12:30:44,897 [INFO] assistant: Agent: invoking LLM
+2026-06-26 12:34:38,167 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-26 12:34:39,736 [INFO] assistant: Tool called: set_reminder | task='cook rice' | time='tomorrow at 10am'
+2026-06-26 12:34:40,014 [INFO] apscheduler.scheduler: Added job "_reminder_fired" to job store "default"
+2026-06-26 12:34:40,015 [INFO] assistant: One-time reminder scheduled for 2026-06-27 10:00:00+00:00
+2026-06-26 12:34:40,044 [INFO] assistant: Agent: invoking LLM
+2026-06-26 12:35:07,387 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-26 12:35:50,661 [INFO] assistant: Assistant response: The reminder has been set for you. You will be reminded to "cook rice" on Saturday, June 27th at 10:00 AM in Africa/Accra. Is there anything else I can assist you with?
+2026-06-26 12:35:50,664 [INFO] assistant: User input: What do I have scheduled?
+2026-06-26 12:35:50,674 [INFO] assistant: Agent: invoking LLM
+2026-06-26 12:35:58,541 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-26 12:37:00,729 [INFO] assistant: Assistant response: I can help you check your scheduled reminders. Could you please tell me if you want to see one-time or recurring reminders, and also specify the time for which you would like to know the schedule? For example, 'tomorrow at 10am', 'in 2 hours', etc., or 'every day at 8am' for a recurring reminder.
+2026-06-26 14:35:01,866 [INFO] apscheduler.scheduler: Scheduler started
+2026-06-26 14:35:05,741 [INFO] assistant: User input: Remind me to cook rice around 10am tomorrow
+2026-06-26 14:35:05,780 [INFO] assistant: Agent: invoking LLM
+2026-06-26 14:39:33,099 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-26 14:39:35,885 [INFO] assistant: Tool called: set_reminder | task='cook rice' | time='tomorrow at 10am'
+2026-06-26 14:39:37,130 [INFO] apscheduler.scheduler: Added job "_reminder_fired" to job store "default"
+2026-06-26 14:39:37,133 [INFO] assistant: One-time reminder scheduled for 2026-06-27 10:00:00+00:00
+2026-06-26 14:39:37,156 [INFO] assistant: Agent: invoking LLM
+2026-06-26 14:40:11,712 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-26 14:40:57,220 [INFO] assistant: Assistant response: The reminder has been set for you. You will be reminded to "cook rice" on Saturday, June 27th at 10:00 AM in Africa/Accra. Is there anything else I can assist you with?
+2026-06-26 14:40:57,236 [INFO] assistant: User input: What do I have scheduled?
+2026-06-26 14:40:57,328 [INFO] assistant: Agent: invoking LLM
+2026-06-26 14:41:07,940 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-26 14:42:27,828 [INFO] assistant: Assistant response: I can help you check your scheduled reminders. Could you please tell me if you want to see one-time or recurring reminders, and also specify the time for which you would like to know the schedule? For example, 'tomorrow at 10am', 'in 2 hours', etc., or 'every day at 8am' for a recurring reminder.
+2026-06-26 15:21:31,407 [INFO] apscheduler.scheduler: Scheduler started
+2026-06-26 15:21:33,684 [INFO] assistant: User input: Remind me to cook food tomorrow around 10am
+2026-06-26 15:21:33,712 [INFO] assistant: Agent: invoking LLM
+2026-06-26 15:26:42,984 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-26 15:26:43,823 [INFO] assistant: Agent: invoking LLM
+2026-06-26 15:30:37,609 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-26 15:31:44,991 [INFO] assistant: Assistant response: I encountered an issue while setting up your reminder. The problem seems to be related to missing information in the time_str parameter. Could you please provide me with all necessary details including the task description? This will help us set up the reminder correctly. If you're unsure about what's needed, just let me know and I'll guide you through it.
+2026-06-26 15:31:45,002 [INFO] assistant: User input: What do I have scheduled?
+2026-06-26 15:31:45,043 [INFO] assistant: Agent: invoking LLM
+2026-06-26 15:35:50,761 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-26 15:59:18,202 [INFO] apscheduler.scheduler: Scheduler started
+2026-06-26 15:59:23,689 [INFO] assistant: User input: Remind me to cook rice around 10am tomorrow
+2026-06-26 15:59:23,822 [INFO] assistant: Agent: invoking LLM
+2026-06-26 16:04:54,688 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-26 16:04:57,043 [INFO] assistant: Tool called: set_reminder | task='cook rice' | time='tomorrow at 10am'
+2026-06-26 16:04:57,860 [INFO] apscheduler.scheduler: Added job "_reminder_fired" to job store "default"
+2026-06-26 16:04:57,878 [INFO] assistant: One-time reminder scheduled for 2026-06-27 10:00:00+00:00
+2026-06-26 16:04:57,930 [INFO] assistant: Agent: invoking LLM
+2026-06-26 16:05:37,489 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-26 16:06:33,131 [INFO] assistant: Assistant response: The reminder has been set for you. You will be reminded to "cook rice" on Saturday, June 27th at 10:00 AM in Africa/Accra. Is there anything else I can assist you with?
+2026-06-26 16:06:33,183 [INFO] assistant: User input: What do I have scheduled?
+2026-06-26 16:06:33,513 [INFO] assistant: Agent: invoking LLM
+2026-06-26 16:06:52,823 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-26 16:08:17,624 [INFO] assistant: Assistant response: I can help you check your scheduled reminders. Could you please tell me if you want to see one-time or recurring reminders, and also specify the time for which you would like to know the schedule? For example, 'tomorrow at 10am', 'in 2 hours', etc., or 'every day at 8am' for a recurring reminder.
+2026-06-26 16:37:48,271 [INFO] apscheduler.scheduler: Scheduler started
+2026-06-26 16:37:50,307 [INFO] assistant: User input: Remind me to cook rice around 10am tomorrow
+2026-06-26 16:37:50,331 [INFO] assistant: Agent: invoking LLM
+2026-06-26 16:41:30,553 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-26 16:41:32,263 [INFO] assistant: Tool called: set_reminder | task='cook rice' | time='tomorrow at 10am'
+2026-06-26 16:41:32,957 [INFO] apscheduler.scheduler: Added job "_reminder_fired" to job store "default"
+2026-06-26 16:41:32,959 [INFO] assistant: One-time reminder scheduled for 2026-06-27 10:00:00+00:00
+2026-06-26 16:41:32,980 [INFO] assistant: Agent: invoking LLM
+2026-06-26 16:42:00,607 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-26 16:42:42,631 [INFO] assistant: Assistant response: The reminder has been set for you. You will be reminded to "cook rice" on Saturday, June 27th at 10:00 AM in Africa/Accra. Is there anything else I can assist you with?
+2026-06-26 16:42:42,638 [INFO] assistant: User input: What do I have scheduled?
+2026-06-26 16:42:42,650 [INFO] assistant: Agent: invoking LLM
+2026-06-26 16:42:50,171 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-26 16:43:51,379 [INFO] assistant: Assistant response: I can help you check your scheduled reminders. Could you please tell me if you want to see one-time or recurring reminders, and also specify the time for which you would like to know the schedule? For example, 'tomorrow at 10am', 'in 2 hours', etc., or 'every day at 8am' for a recurring reminder.
+2026-06-26 17:28:06,183 [INFO] apscheduler.scheduler: Scheduler started
+2026-06-26 17:28:08,672 [INFO] assistant: User input: Remind me to cook rice around 10am tomorrow
+2026-06-26 17:28:08,736 [INFO] assistant: Agent: invoking LLM
+2026-06-26 17:32:27,583 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-26 17:32:29,539 [INFO] apscheduler.scheduler: Added job "_reminder_fired" to job store "default"
+2026-06-26 17:32:29,543 [INFO] assistant: One-time reminder scheduled for 2026-06-27 10:00:00+00:00
+2026-06-26 17:32:29,576 [INFO] assistant: Agent: invoking LLM
+2026-06-26 17:32:57,033 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-26 17:33:40,318 [INFO] assistant: Assistant response: The reminder has been set for you. You will be reminded to "cook rice" on Saturday, June 27th at 10:00 AM in Africa/Accra. Is there anything else I can assist you with?
+2026-06-26 17:33:40,329 [INFO] assistant: User input: What do I have scheduled?
+2026-06-26 17:33:40,420 [INFO] assistant: Agent: invoking LLM
+2026-06-26 17:33:48,140 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-26 17:34:53,844 [INFO] assistant: Assistant response: I can help you check your scheduled reminders. Could you please tell me if you want to see one-time or recurring reminders, and also specify the time for which you would like to know the schedule? For example, 'tomorrow at 10am', 'in 2 hours', etc., or 'every day at 8am' for a recurring reminder.
+2026-06-26 17:38:45,992 [INFO] apscheduler.scheduler: Scheduler started
+2026-06-26 17:38:48,558 [INFO] assistant: User input: Remind me to cook rice around 10am tomorrow
+2026-06-26 17:38:48,617 [INFO] assistant: Agent: invoking LLM
+2026-06-26 17:39:44,081 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-26 17:39:46,050 [INFO] apscheduler.scheduler: Added job "_reminder_fired" to job store "default"
+2026-06-26 17:39:46,051 [INFO] assistant: One-time reminder scheduled for 2026-06-27 10:00:00+00:00
+2026-06-26 17:39:46,074 [INFO] assistant: Agent: invoking LLM
+2026-06-26 17:40:14,306 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-26 17:40:55,777 [INFO] assistant: Assistant response: The reminder has been set for you. You will be reminded to "cook rice" on Saturday, June 27th at 10:00 AM in Africa/Accra. Is there anything else I can assist you with?
+2026-06-26 17:40:55,781 [INFO] assistant: User input: What did i schedule something for tomorrow?
+2026-06-26 17:40:55,787 [INFO] assistant: Agent: invoking LLM
+2026-06-26 17:41:04,487 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-26 17:41:59,755 [INFO] assistant: Assistant response: To help you find out what task is scheduled for tomorrow, I will use the tool to check your upcoming reminders. Please note that this information might not be immediately available if it's a one-time reminder or if there are no recurring tasks set up.
+
+2026-06-26 17:41:59,820 [INFO] assistant: Agent: invoking LLM
+2026-06-26 17:42:31,122 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-26 17:43:03,578 [INFO] assistant: Assistant response: The scheduled reminder is set for cooking rice on June 27, 2026 at 10:00 AM (UTC/GMT). It's a one-time reminder.
+2026-06-26 17:58:39,025 [INFO] apscheduler.scheduler: Scheduler started
+2026-06-26 18:02:39,401 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-26 18:06:14,164 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-26 18:52:28,144 [INFO] apscheduler.scheduler: Scheduler started
+2026-06-26 18:52:31,250 [ERROR] assistant: LLM invocation failed: system_prompt() got an unexpected keyword argument 'current_time'
+Traceback (most recent call last):
+  File "D:\model\assistant\src\assistant.py", line 315, in call_model
+        return {"messages": [response]}
+                        ^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    
+    
+TypeError: system_prompt() got an unexpected keyword argument 'current_time'
+2026-06-26 18:52:31,254 [ERROR] assistant: run_assistant failed: system_prompt() got an unexpected keyword argument 'current_time'
+Traceback (most recent call last):
+  File "D:\model\assistant\src\assistant.py", line 353, in run_assistant
+    print("Assistant: Sorry, something went wrong. Please try again.")
+                  ^^^^^^^^^^^^^^^^^^
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\pregel\main.py", line 2982, in stream
+    for _ in runner.tick(
+             ~~~~~~~~~~~^
+        [t for t in loop.tasks.values() if not t.writes],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        schedule_task=loop.accept_push,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ):
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\pregel\_runner.py", line 207, in tick
+    run_with_retry(
+    ~~~~~~~~~~~~~~^
+        t,
+        ^^
+    ...<10 lines>...
+        },
+        ^^
+    )
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\pregel\_retry.py", line 617, in run_with_retry
+    return task.proc.invoke(task.input, config)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 684, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 426, in invoke
+    ret = self.func(*args, **kwargs)
+  File "D:\model\assistant\src\assistant.py", line 315, in call_model
+        return {"messages": [response]}
+                        ^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    
+    
+TypeError: system_prompt() got an unexpected keyword argument 'current_time'
+During task with name 'agent' and id '9ff06af2-99a4-fdb5-47d2-00a65ffa652d'
+2026-06-26 18:52:32,949 [ERROR] assistant: LLM invocation failed: system_prompt() got an unexpected keyword argument 'current_time'
+Traceback (most recent call last):
+  File "D:\model\assistant\src\assistant.py", line 315, in call_model
+        return {"messages": [response]}
+                        ^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    
+    
+TypeError: system_prompt() got an unexpected keyword argument 'current_time'
+2026-06-26 18:52:32,951 [ERROR] assistant: run_assistant failed: system_prompt() got an unexpected keyword argument 'current_time'
+Traceback (most recent call last):
+  File "D:\model\assistant\src\assistant.py", line 353, in run_assistant
+    print("Assistant: Sorry, something went wrong. Please try again.")
+                  ^^^^^^^^^^^^^^^^^^
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\pregel\main.py", line 2982, in stream
+    for _ in runner.tick(
+             ~~~~~~~~~~~^
+        [t for t in loop.tasks.values() if not t.writes],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        schedule_task=loop.accept_push,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ):
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\pregel\_runner.py", line 207, in tick
+    run_with_retry(
+    ~~~~~~~~~~~~~~^
+        t,
+        ^^
+    ...<10 lines>...
+        },
+        ^^
+    )
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\pregel\_retry.py", line 617, in run_with_retry
+    return task.proc.invoke(task.input, config)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 684, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 426, in invoke
+    ret = self.func(*args, **kwargs)
+  File "D:\model\assistant\src\assistant.py", line 315, in call_model
+        return {"messages": [response]}
+                        ^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    
+    
+TypeError: system_prompt() got an unexpected keyword argument 'current_time'
+During task with name 'agent' and id 'd9a1f134-abed-d130-e6c4-5b75472d0eb3'
+2026-06-26 18:53:10,292 [INFO] apscheduler.scheduler: Scheduler started
+2026-06-26 18:53:12,349 [ERROR] assistant: LLM invocation failed: system_prompt() missing 2 required positional arguments: 'USER_TIMEZONE' and 'now_local'
+Traceback (most recent call last):
+  File "D:\model\assistant\src\assistant.py", line 313, in call_model
+    messages = [SystemMessage(content=system_prompt())] + state["messages"]
+                                      ~~~~~~~~~~~~~^^
+TypeError: system_prompt() missing 2 required positional arguments: 'USER_TIMEZONE' and 'now_local'
+2026-06-26 18:53:12,354 [ERROR] assistant: run_assistant failed: system_prompt() missing 2 required positional arguments: 'USER_TIMEZONE' and 'now_local'
+Traceback (most recent call last):
+  File "D:\model\assistant\src\assistant.py", line 345, in run_assistant
+    for output in app.stream(inputs):
+                  ~~~~~~~~~~^^^^^^^^
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\pregel\main.py", line 2982, in stream
+    for _ in runner.tick(
+             ~~~~~~~~~~~^
+        [t for t in loop.tasks.values() if not t.writes],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        schedule_task=loop.accept_push,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ):
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\pregel\_runner.py", line 207, in tick
+    run_with_retry(
+    ~~~~~~~~~~~~~~^
+        t,
+        ^^
+    ...<10 lines>...
+        },
+        ^^
+    )
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\pregel\_retry.py", line 617, in run_with_retry
+    return task.proc.invoke(task.input, config)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 684, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 426, in invoke
+    ret = self.func(*args, **kwargs)
+  File "D:\model\assistant\src\assistant.py", line 313, in call_model
+    messages = [SystemMessage(content=system_prompt())] + state["messages"]
+                                      ~~~~~~~~~~~~~^^
+TypeError: system_prompt() missing 2 required positional arguments: 'USER_TIMEZONE' and 'now_local'
+During task with name 'agent' and id '69750718-bd67-42a7-5919-75ddb556c9e8'
+2026-06-26 18:53:12,490 [ERROR] assistant: LLM invocation failed: system_prompt() missing 2 required positional arguments: 'USER_TIMEZONE' and 'now_local'
+Traceback (most recent call last):
+  File "D:\model\assistant\src\assistant.py", line 313, in call_model
+    messages = [SystemMessage(content=system_prompt())] + state["messages"]
+                                      ~~~~~~~~~~~~~^^
+TypeError: system_prompt() missing 2 required positional arguments: 'USER_TIMEZONE' and 'now_local'
+2026-06-26 18:53:12,492 [ERROR] assistant: run_assistant failed: system_prompt() missing 2 required positional arguments: 'USER_TIMEZONE' and 'now_local'
+Traceback (most recent call last):
+  File "D:\model\assistant\src\assistant.py", line 345, in run_assistant
+    for output in app.stream(inputs):
+                  ~~~~~~~~~~^^^^^^^^
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\pregel\main.py", line 2982, in stream
+    for _ in runner.tick(
+             ~~~~~~~~~~~^
+        [t for t in loop.tasks.values() if not t.writes],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        schedule_task=loop.accept_push,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ):
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\pregel\_runner.py", line 207, in tick
+    run_with_retry(
+    ~~~~~~~~~~~~~~^
+        t,
+        ^^
+    ...<10 lines>...
+        },
+        ^^
+    )
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\pregel\_retry.py", line 617, in run_with_retry
+    return task.proc.invoke(task.input, config)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 684, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 426, in invoke
+    ret = self.func(*args, **kwargs)
+  File "D:\model\assistant\src\assistant.py", line 313, in call_model
+    messages = [SystemMessage(content=system_prompt())] + state["messages"]
+                                      ~~~~~~~~~~~~~^^
+TypeError: system_prompt() missing 2 required positional arguments: 'USER_TIMEZONE' and 'now_local'
+During task with name 'agent' and id '97165c1d-a28d-5102-e191-f0ce8422a348'
+2026-06-26 18:54:14,275 [INFO] apscheduler.scheduler: Scheduler started
+2026-06-26 18:54:16,336 [ERROR] assistant: LLM invocation failed: system_prompt() missing 2 required positional arguments: 'USER_TIMEZONE' and 'now_local'
+Traceback (most recent call last):
+  File "D:\model\assistant\src\assistant.py", line 313, in call_model
+    messages = [SystemMessage(content=system_prompt())] + state["messages"]
+                                      ~~~~~~~~~~~~~^^
+TypeError: system_prompt() missing 2 required positional arguments: 'USER_TIMEZONE' and 'now_local'
+2026-06-26 18:54:16,340 [ERROR] assistant: run_assistant failed: system_prompt() missing 2 required positional arguments: 'USER_TIMEZONE' and 'now_local'
+Traceback (most recent call last):
+  File "D:\model\assistant\src\assistant.py", line 345, in run_assistant
+    for output in app.stream(inputs):
+                  ~~~~~~~~~~^^^^^^^^
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\pregel\main.py", line 2982, in stream
+    for _ in runner.tick(
+             ~~~~~~~~~~~^
+        [t for t in loop.tasks.values() if not t.writes],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        schedule_task=loop.accept_push,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ):
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\pregel\_runner.py", line 207, in tick
+    run_with_retry(
+    ~~~~~~~~~~~~~~^
+        t,
+        ^^
+    ...<10 lines>...
+        },
+        ^^
+    )
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\pregel\_retry.py", line 617, in run_with_retry
+    return task.proc.invoke(task.input, config)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 684, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 426, in invoke
+    ret = self.func(*args, **kwargs)
+  File "D:\model\assistant\src\assistant.py", line 313, in call_model
+    messages = [SystemMessage(content=system_prompt())] + state["messages"]
+                                      ~~~~~~~~~~~~~^^
+TypeError: system_prompt() missing 2 required positional arguments: 'USER_TIMEZONE' and 'now_local'
+During task with name 'agent' and id 'd62c4e9a-ce55-a989-cd8f-1cea4aef2b34'
+2026-06-26 18:54:16,410 [ERROR] assistant: LLM invocation failed: system_prompt() missing 2 required positional arguments: 'USER_TIMEZONE' and 'now_local'
+Traceback (most recent call last):
+  File "D:\model\assistant\src\assistant.py", line 313, in call_model
+    messages = [SystemMessage(content=system_prompt())] + state["messages"]
+                                      ~~~~~~~~~~~~~^^
+TypeError: system_prompt() missing 2 required positional arguments: 'USER_TIMEZONE' and 'now_local'
+2026-06-26 18:54:16,422 [ERROR] assistant: run_assistant failed: system_prompt() missing 2 required positional arguments: 'USER_TIMEZONE' and 'now_local'
+Traceback (most recent call last):
+  File "D:\model\assistant\src\assistant.py", line 345, in run_assistant
+    for output in app.stream(inputs):
+                  ~~~~~~~~~~^^^^^^^^
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\pregel\main.py", line 2982, in stream
+    for _ in runner.tick(
+             ~~~~~~~~~~~^
+        [t for t in loop.tasks.values() if not t.writes],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<2 lines>...
+        schedule_task=loop.accept_push,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ):
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\pregel\_runner.py", line 207, in tick
+    run_with_retry(
+    ~~~~~~~~~~~~~~^
+        t,
+        ^^
+    ...<10 lines>...
+        },
+        ^^
+    )
+    ^
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\pregel\_retry.py", line 617, in run_with_retry
+    return task.proc.invoke(task.input, config)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 684, in invoke
+    input = context.run(step.invoke, input, config, **kwargs)
+  File "D:\model\assistant\venv\Lib\site-packages\langgraph\_internal\_runnable.py", line 426, in invoke
+    ret = self.func(*args, **kwargs)
+  File "D:\model\assistant\src\assistant.py", line 313, in call_model
+    messages = [SystemMessage(content=system_prompt())] + state["messages"]
+                                      ~~~~~~~~~~~~~^^
+TypeError: system_prompt() missing 2 required positional arguments: 'USER_TIMEZONE' and 'now_local'
+During task with name 'agent' and id '436e721c-bd52-95b5-53ff-8258f2b8b70b'
+2026-06-26 19:04:03,808 [INFO] apscheduler.scheduler: Scheduler started
+2026-06-26 19:14:02,966 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-26 19:22:56,239 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-26 19:32:59,190 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-26 19:41:42,795 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-26 19:47:06,051 [INFO] apscheduler.scheduler: Scheduler started
+2026-06-26 19:56:59,251 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-26 20:05:34,277 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-26 20:15:56,148 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-26 20:25:06,063 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-26 21:02:23,015 [INFO] apscheduler.scheduler: Scheduler started
+2026-06-26 21:13:47,639 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-26 22:52:35,171 [INFO] apscheduler.scheduler: Scheduler started
+2026-06-26 23:03:26,572 [INFO] apscheduler.scheduler: Scheduler started
+2026-06-26 23:12:48,522 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-26 23:21:32,533 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-26 23:31:43,402 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+2026-06-26 23:40:49,040 [INFO] httpx: HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
